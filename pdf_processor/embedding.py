@@ -42,7 +42,19 @@ def build_faiss_index(pdf_path):
     # the FAISS search structure.
     index.add(np.array(embeddings, dtype='float32'))
 
+    # faiss.write_index(index, "vector_index.faiss"): 
+    # This saves the entire optimized FAISS index 
+    # structure, including all the numerical vectors, 
+    # to a binary file named vector_index.faiss. 
+    # This is the search index.
     faiss.write_index(index, "vector_index.faiss")
 
+    # json.dump(chunks, f): Writes the list of original 
+    # chunks (the text strings) into the text_chunks.json
+    # file. This file is critical because it acts as the 
+    # lookup table; when a search returns a vector ID 
+    # from FAISS, the system uses this JSON file to 
+    # retrieve the actual text chunk that the vector 
+    # represents
     with open("text_chunks.json", "w") as f:
         json.dump(chunks, f)
