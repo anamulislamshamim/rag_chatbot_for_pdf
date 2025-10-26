@@ -2,3 +2,4 @@ denv
 .denv 
 .venv
 venv 
+.env
