@@ -17,6 +17,11 @@ except Exception as e:
     GENAI_CLIENT = None
 
 class ChatView(APIView):
+    # if GENAI_CLIENT:
+    #     models = GENAI_CLIENT.models.list()
+    #     for m in models:
+    #         print(m.name)
+
     @swagger_auto_schema(
         operation_description="Ask a question related to the PDF document.",
         request_body=ChatRequestSerializers,
@@ -50,10 +55,9 @@ class ChatView(APIView):
                 context_chunks = faiss_loader.find_similar_chunks(question, faiss_index, text_chunks)
                 context = "\n".join(context_chunks)
 
-                model = genai.GenerativeModel('models/gemini-1.5-flash')
                 prompt = f"Use the context below to answer:\n\n{context}\n\nQuestion: {question}"
                 ai_response = GENAI_CLIENT.models.generate_content(
-                    model='gemini-1.5-flash',  # Use the canonical model name
+                    model='models/gemini-2.5-flash',  # Use the canonical model name
                     contents=prompt
                 )
 
