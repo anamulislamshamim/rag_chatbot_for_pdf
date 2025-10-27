@@ -158,6 +158,6 @@ python-dotenv==1.1.1
 
 Thank you for giving me this exciting project as an assignment. It allowed me to implement a full **RAG chatbot pipeline** with **PDF-based Q&A**, **AI/NLP integration**, **secure API access**, and an interactive **Gradio interface**.
 
-— **Shamim**
-— **[LinkedIn Profile](https://www.linkedin.com/in/anamul-islam-shamim/)**
+— **Shamim** <br>
+**[LinkedIn Profile](https://www.linkedin.com/in/anamul-islam-shamim/)**
 ```
