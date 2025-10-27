@@ -85,7 +85,7 @@ python gradio_app.py
 
 ## 🔑 API Key Setup
 
-* All API requests require a valid `Authorization: Api-Key <your_api_key>` header or `X-API-KEY` header.
+* All API requests require a valid `Authorization: Api-Key <your_api_key>` header.
 * Example curl request:
 
 ```bash
@@ -105,8 +105,8 @@ curl -X POST http://127.0.0.1:8000/api/chat/ \
 
 ## ⏱ Rate Limiter
 
-* Each API key is allowed **1 request per minute**.
-* Requests exceeding this limit will return:
+* Each API key is allowed **1 request per 10 seconds**.
+* Requests exceeding this limit will return 429 status code with the following:
 
 ```json
 {"detail": "Rate limit exceeded. Try again in XXs."}
