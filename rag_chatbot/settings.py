@@ -166,3 +166,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Gemini API KEY
 API_KEY_GEMINI = os.getenv("API_KEY_GEMINI")
+# Auth api key
+AUTH_API_KEY = os.getenv("AUTH_API_KEY", "")

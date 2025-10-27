@@ -46,7 +46,7 @@ class ChatView(APIView):
     )
     def post(self, request):
         # Run rate limiter
-        limiter = SimpleRateLimiter(rate_limit=1, period=60)
+        limiter = SimpleRateLimiter(rate_limit=1, period=10)
         limiter.check(request.api_key)
         
         # Ensure the client was initialized successfully
