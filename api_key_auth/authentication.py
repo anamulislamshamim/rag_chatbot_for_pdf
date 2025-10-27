@@ -1,48 +1,48 @@
 from rest_framework import authentication, exceptions
 from django.utils.translation import gettext_lazy as _
 from .models import APIKey
+import hashlib
 
 
 class APIKeyAuthentication(authentication.BaseAuthentication):
     """
     Accepts:
-    - Authorization: Api-key <plaintext_key>
-    - OR X-API-KEY: <plaintext_key>
+      - Authorization: Api-Key <key>
+      - or X-API-KEY: <key>
     """
 
     keyword = "Api-Key"
 
     def authenticate(self, request):
+        # Get key from header
         auth_header = authentication.get_authorization_header(request).decode('utf-8')
         key = None 
-
+        print("Debug: Auth_header:", auth_header)
         if auth_header:
-            parts = auth_header.split()
-            if parts == 2 and parts[0] == self.keyword:
+            parts = auth_header.split(" ")
+            print("Debug: ", parts)
+            if len(parts) == 2 and parts[0] == self.keyword:
                 key = parts[1] 
-            elif len(parts) == 1 and parts[0].startswith(self.keyword + ":"):
-                key = parts[0].split(":", 1)[1]
+            elif len(parts) == 1 and parts[0].startswith(self.keyword):
+                key = parts[0][len(self.keyword):]
 
+        print(key)
         # 2) Fallback to custom header.
         if not key:
             key = request.META.get("HTTP_X_API_KEY") or request.META.get("X_API_KEY")
-        
+
         if not key:
-            return None 
-        
-        # Validate against DB
-        try:
-            # We cannot query by hashed_key without hashing; compute sha256 then query for performance.
-            import hashlib 
-            hashed = hashlib.sha256(key.encode('utf-8')).hexdigest()
-            api_obj = APIKey.objects.filter(hashed_key=hashed, revoked=False).first()
-        except Exception:
-            raise exceptions.AuthenticationFailed(_("API key authentication error"))
-        
-        if not api_obj:
+            raise exceptions.AuthenticationFailed(_("API key required"))
+
+        hashed = hashlib.sha256(key.encode("utf-8")).hexdigest()
+        api_key = APIKey.objects.filter(hashed_key=hashed, revoked=False).first()
+        if not api_key:
             raise exceptions.AuthenticationFailed(_("Invalid or revoked API key"))
-        
-        # Return an (user, auth) tuple. We don't have Django user per-key; return None user or create a pseudo-user.
-        # DRF expects an object; we can return AnonymousUser or a lightweight object.
+
+        api_key.mark_used()
+
         from django.contrib.auth.models import AnonymousUser
-        return (AnonymousUser(), None)
+        user = AnonymousUser()
+        user.username = f"apikey:{api_key.name}"
+        print("Debug:", api_key.name)
+        return (user, None)

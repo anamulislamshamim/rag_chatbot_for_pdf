@@ -7,8 +7,9 @@ from django.conf import settings
 from google import genai
 from core import faiss_loader
 from .serializers import ChatRequestSerializers
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes, authentication_classes
+from api_key_auth.permissions import HasAPIKey
+from api_key_auth.authentication import APIKeyAuthentication
 
 
 try:
@@ -23,7 +24,8 @@ class ChatView(APIView):
     #     models = GENAI_CLIENT.models.list()
     #     for m in models:
     #         print(m.name)
-
+    authentication_classes = [APIKeyAuthentication]
+    # permission_classes = [HasAPIKey]
     @swagger_auto_schema(
         operation_description="Ask a question related to the PDF document.",
         request_body=ChatRequestSerializers,
@@ -41,7 +43,6 @@ class ChatView(APIView):
             500: "Internal Server Error"
         }
     )
-    @permission_classes([IsAuthenticated])
     def post(self, request):
         # Ensure the client was initialized successfully
         if GENAI_CLIENT is None:

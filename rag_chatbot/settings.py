@@ -80,15 +80,25 @@ WSGI_APPLICATION = 'rag_chatbot.wsgi.application'
 
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "api_key_auth.authentication.APIKeyAuthentication",
-        # optionally include SessionAuthentication for admin or other flows:
-        "rest_framework.authentication.SessionAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",  # require auth by default
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny"
+    ],
 }
+
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "in": "header",                # where to expect the key
+            "name": "Authorization",       # header name (or "X-API-KEY" if you prefer)
+            "description": "Use the format: Api-Key <your_api_key>",
+        }
+    },
+    "USE_SESSION_AUTH": False,             # disable login/password auth in Swagger
+}
+
 
 
 # Database

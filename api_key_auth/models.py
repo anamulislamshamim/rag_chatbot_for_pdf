@@ -31,6 +31,8 @@ class APIKey(models.Model):
                 return obj, plaintext
             except IntegrityError:
                 continue
+        
+        raise Exception("Failed to create a unique key after multiple attempts.")
 
 
     def check_key(self, plaintext: str) -> bool:
