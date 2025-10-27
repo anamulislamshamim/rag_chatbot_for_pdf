@@ -17,16 +17,13 @@ class APIKeyAuthentication(authentication.BaseAuthentication):
         # Get key from header
         auth_header = authentication.get_authorization_header(request).decode('utf-8')
         key = None 
-        print("Debug: Auth_header:", auth_header)
         if auth_header:
             parts = auth_header.split(" ")
-            print("Debug: ", parts)
             if len(parts) == 2 and parts[0] == self.keyword:
                 key = parts[1] 
             elif len(parts) == 1 and parts[0].startswith(self.keyword):
                 key = parts[0][len(self.keyword):]
 
-        print(key)
         # 2) Fallback to custom header.
         if not key:
             key = request.META.get("HTTP_X_API_KEY") or request.META.get("X_API_KEY")
@@ -44,5 +41,4 @@ class APIKeyAuthentication(authentication.BaseAuthentication):
         from django.contrib.auth.models import AnonymousUser
         user = AnonymousUser()
         user.username = f"apikey:{api_key.name}"
-        print("Debug:", api_key.name)
         return (user, None)

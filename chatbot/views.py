@@ -25,7 +25,7 @@ class ChatView(APIView):
     #     for m in models:
     #         print(m.name)
     authentication_classes = [APIKeyAuthentication]
-    # permission_classes = [HasAPIKey]
+    permission_classes = [HasAPIKey]
     @swagger_auto_schema(
         operation_description="Ask a question related to the PDF document.",
         request_body=ChatRequestSerializers,

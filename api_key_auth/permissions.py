@@ -9,7 +9,6 @@ class HasAPIKey(BasePermission):
 
     def has_permission(self, request, view):
         if not getattr(request, 'user', None):
-            print("Debug line 12")
             raise exceptions.AuthenticationFailed("API key required")
         if not hasattr(request, 'successful_authenticator'):
             raise exceptions.AuthenticationFailed("API key required")
