@@ -7,6 +7,8 @@ from django.conf import settings
 from google import genai
 from core import faiss_loader
 from .serializers import ChatRequestSerializers
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 
 try:
@@ -39,6 +41,7 @@ class ChatView(APIView):
             500: "Internal Server Error"
         }
     )
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         # Ensure the client was initialized successfully
         if GENAI_CLIENT is None:

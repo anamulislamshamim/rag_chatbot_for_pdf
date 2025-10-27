@@ -79,6 +79,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'rag_chatbot.wsgi.application'
 
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "api_key_auth.authentication.APIKeyAuthentication",
+        # optionally include SessionAuthentication for admin or other flows:
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",  # require auth by default
+    ),
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
