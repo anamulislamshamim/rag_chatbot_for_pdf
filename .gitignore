@@ -3,3 +3,4 @@ denv
 .venv
 venv 
 .env
+staticfiles

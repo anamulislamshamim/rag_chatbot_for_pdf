@@ -157,7 +157,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# drf-yasg uses this to build its internal links to assets
+STATIC_URL = '/static/' 
+
+# 2. Define the absolute path where all static files will be collected
+# This directory is where the Starlette StaticFiles handler is looking.
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

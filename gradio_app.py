@@ -25,9 +25,14 @@ def ask_question(question, history):
     except Exception as e:
         return f"⚠️ Exception: {str(e)}"
     
+
+chatbot_component = gr.Chatbot(type="messages", label="Chat History")
+
 # Create a simple Gradio interface
 iface = gr.ChatInterface(
     fn=ask_question,
+    chatbot=chatbot_component,
+    type="messages",
     title="📄 RAG Chatbot PDF Q&A",
     description="Ask questions based on the provided PDF document. Powered by Django + Gemini + FAISS.",
     theme="soft",
@@ -43,4 +48,4 @@ iface = gr.ChatInterface(
 gradio_asgi_app = iface.app
 
 if __name__ == "__main__":
-    iface.launch(server_port=7860) 
+    iface.launch(server_name="127.0.0.1", server_port=7860)
