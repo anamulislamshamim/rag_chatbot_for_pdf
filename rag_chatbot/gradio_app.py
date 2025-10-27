@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 
-API_URL = "http://127.0.0.1:8000/api/chat/"
+API_URL = "http://localhost:8000/api/chat/"
 API_KEY=os.getenv("AUTH_API_KEY")
 
 
@@ -37,6 +37,10 @@ iface = gr.ChatInterface(
         ["What services does it provide?"],
     ],
 )
+
+# EXPOSE THE ASGI APP
+# Gradio's Blocks/Interface object has an 'app' property which is the ASGI application.
+gradio_asgi_app = iface.app
 
 if __name__ == "__main__":
     iface.launch(server_port=7860) 
