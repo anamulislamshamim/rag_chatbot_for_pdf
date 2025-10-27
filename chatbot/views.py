@@ -7,7 +7,6 @@ from django.conf import settings
 from google import genai
 from core import faiss_loader
 from .serializers import ChatRequestSerializers
-from rest_framework.decorators import permission_classes, authentication_classes
 from api_key_auth.permissions import HasAPIKey
 from api_key_auth.authentication import APIKeyAuthentication
 from utils.rate_limiter import SimpleRateLimiter
