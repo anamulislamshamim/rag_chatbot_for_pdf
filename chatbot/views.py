@@ -10,6 +10,7 @@ from .serializers import ChatRequestSerializers
 from rest_framework.decorators import permission_classes, authentication_classes
 from api_key_auth.permissions import HasAPIKey
 from api_key_auth.authentication import APIKeyAuthentication
+from utils.rate_limiter import SimpleRateLimiter
 
 
 try:
@@ -44,6 +45,10 @@ class ChatView(APIView):
         }
     )
     def post(self, request):
+        # Run rate limiter
+        limiter = SimpleRateLimiter(rate_limit=1, period=60)
+        limiter.check(request.api_key)
+        
         # Ensure the client was initialized successfully
         if GENAI_CLIENT is None:
             return Response(

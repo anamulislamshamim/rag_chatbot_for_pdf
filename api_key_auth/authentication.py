@@ -16,6 +16,7 @@ class APIKeyAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         # Get key from header
         auth_header = authentication.get_authorization_header(request).decode('utf-8')
+        auth_header = auth_header.strip()
         key = None 
         if auth_header:
             parts = auth_header.split(" ")
@@ -41,4 +42,5 @@ class APIKeyAuthentication(authentication.BaseAuthentication):
         from django.contrib.auth.models import AnonymousUser
         user = AnonymousUser()
         user.username = f"apikey:{api_key.name}"
+        request.api_key = str(key)
         return (user, None)

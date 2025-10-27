@@ -100,6 +100,17 @@ SWAGGER_SETTINGS = {
 }
 
 
+CACHES = {
+    "default": {
+        # for redis
+        # "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        # "LOCATION": "redis://127.0.0.1:6379/1",
+        # for local memory
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache", # in-memory
+        "LOCATION": "unique-rate-limit",
+    }
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
