@@ -1,10 +1,159 @@
-# 🧠 RAG Chatbot (Django + FAISS + Gemini)
+Here’s a polished `README.md` for your RAG Chatbot project based on your details:
 
-A document-based Q&A chatbot that retrieves relevant context from a PDF and answers using Google Gemini.
+````markdown
+# 📄 RAG Chatbot PDF Q&A
 
-### 🚀 Setup
+This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **Python, Django REST API, and Gradio UI**. It allows users to ask questions based on the content of a PDF document and receive AI-generated responses. The chatbot uses **Gemini (gemini-2.5-flash)** for generation, **all-MiniLM-L6-v2 embeddings** for semantic search, and **FAISS** for vector storage.
+
+---
+
+## 🚀 Features
+
+- **PDF-based Q&A**: Ask questions derived from any uploaded PDF document.
+- **AI-powered responses**: Uses Gemini LLM and embeddings to retrieve relevant answers.
+- **REST API**: Access the chatbot programmatically via `/chat/`.
+- **Gradio UI**: Interactive ChatGPT-like web interface for testing and demonstration.
+- **Swagger Documentation**: API documentation is available for testing endpoints.
+- **API Key Authentication**: Secure access to the API to prevent unauthorized use.
+- **Rate Limiter**: 1 request per minute per API key to prevent abuse.
+- **SQLite Database**: Lightweight relational database for testing (no chat history storage required).
+
+---
+
+## ⚙️ Technology Stack
+
+- **LLM / AI**: Gemini (`gemini-2.5-flash`)
+- **Embeddings**: `all-MiniLM-L6-v2`
+- **Vector Database**: FAISS
+- **PDF Processing**: PyPDF2, PyMuPDF
+- **Web Framework**: Django REST Framework
+- **UI**: Gradio
+- **Database**: SQLite3 (simple, lightweight, relational)
+- **API Authentication**: API key-based
+- **Rate Limiting**: Custom per-key rate limiter
+
+> SQLite was chosen over PostgreSQL/MySQL because this project is primarily for testing and demonstration purposes. It provides relational features without the overhead of a full database setup.
+
+---
+
+## 📥 Setup Instructions
+
+1. **Clone the repository**
 ```bash
+git clone https://github.com/<your-username>/rag-chatbot.git
+cd rag-chatbot
+````
+
+2. **Create a virtual environment and install dependencies**
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
 pip install -r requirements.txt
+```
+
+3. **Create `.env` file**
+
+```env
+DEBUG=False
+SECRET_KEY="django-insecure-2$+1h)6yjj!w$g$e-$f=nt^7)j%(l+c=+y4in&g"
+DATABASE_URL=sqlite:///db.sqlite3
+API_KEY_GEMINI="AIzaSyB_DIaezI"
+AUTH_API_KEY="SSQ9oDmBfWnK-BTuWmgnvk"
+```
+
+4. **Run migrations**
+
+```bash
 python manage.py migrate
+```
+
+5. **Start Django server**
+
+```bash
 python manage.py runserver
+```
+
+6. **Run Gradio UI**
+
+```bash
+python gradio_app.py
+```
+
+> By default, Gradio will provide a temporary public link for sharing. Use `share=True` to make it accessible globally.
+
+---
+
+## 🔑 API Key Setup
+
+* All API requests require a valid `Authorization: Api-Key <your_api_key>` header or `X-API-KEY` header.
+* Example curl request:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/chat/ \
+  -H "Authorization: Api-Key SSQ9oDmBfWnK-BTuWmgnvk" \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is the company name?"}'
+```
+
+* Requests without a valid API key will return:
+
+```json
+{"detail": "API key required"}
+```
+
+---
+
+## ⏱ Rate Limiter
+
+* Each API key is allowed **1 request per minute**.
+* Requests exceeding this limit will return:
+
+```json
+{"detail": "Rate limit exceeded. Try again in XXs."}
+```
+
+* Prevents abuse and ensures fair usage of your API key.
+
+---
+
+## 📝 Additional Notes
+
+* **Gradio UI** provides a ChatGPT-like interface for testing the chatbot interactively.
+* **Swagger UI** is available at `/swagger/` to explore and test API endpoints.
+* SQLite3 is sufficient for this project since we do **not store chat history** — it’s lightweight and relational.
+
+---
+
+## 📄 Requirements
+
+Example `requirements.txt` snippet:
+
+```text
+Django==5.2.7
+djangorestframework==3.16.1
+drf-yasg==1.21.11
+faiss-cpu==1.12.0
+google-ai-generativelanguage==0.6.15
+gradio==5.49.1
+requests==2.32.5
+sentence-transformers==5.1.2
+PyPDF2==3.0.1
+PyMuPDF==1.26.5
+sqlite3
+python-dotenv==1.1.1
+```
+
+*(Full `requirements.txt` included in repository)*
+
+---
+
+## 🙏 Thank You
+
+Thank you for giving me this exciting project as an assignment. It allowed me to implement a full **RAG chatbot pipeline** with **PDF-based Q&A**, **AI/NLP integration**, **secure API access**, and an interactive **Gradio interface**.
+
+— **Shamim**
+— **[LinkedIn Profile](https://www.linkedin.com/in/anamul-islam-shamim/)**
 ```
