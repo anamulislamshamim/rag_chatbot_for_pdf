@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core',
     'pdf_processor',
     'chatbot',
+    'api_key_auth'
 ]
 
 MIDDLEWARE = [
