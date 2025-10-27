@@ -37,8 +37,8 @@ This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/<your-username>/rag-chatbot.git
-cd rag-chatbot
+git clone https://github.com/anamulislamshamim/rag_chatbot_for_pdf.git
+cd rag_chatbot_for_pdf
 ````
 
 2. **Create a virtual environment and install dependencies**
@@ -146,6 +146,13 @@ python-dotenv==1.1.1
 *(Full `requirements.txt` included in repository)*
 
 ---
+
+## ❓Some Example Questions
+```bash
+1. What is Audaces?
+2. Tell me about Audaces?
+3. AUDACES EUROPE SRL contact information?
+```
 
 ## 🙏 Thank You
 
