@@ -1,4 +1,4 @@
-[![Watch the video](images/render_deployment_issue_1.png)](https://drive.google.com/file/d/1ZWc-QDKpjW40JsLfbdCFbIq_Wj6rXzSB/view?usp=sharing)
+[![Watch the video](images/render_deployment_issue_1.png)](https://drive.google.com/file/d/1ZWc-QDKpjW40JsLfbdCFbIq_Wj6rXzSB/view)
 
 # 📄 RAG Chatbot PDF Q&A
 
