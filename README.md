@@ -107,6 +107,16 @@ curl -X POST http://127.0.0.1:8000/api/chat/ \
 {"detail": "API key required"}
 ```
 
+## How to generate Api-Key
+```python
+python manage.py create_apikey "test_api_key_2" --notes "This token is for demonstration purpose!"
+```
+```bash
+Name: test_api_key_2
+Plaintext API key (copy and store it now; only shown once):
+mL0yv3LSvD7EDPgWfOhJjAZNWOGeVfldv17kIZIPvyI
+````
+
 ---
 
 ## ⏱ Rate Limiter
