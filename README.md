@@ -65,6 +65,8 @@ AUTH_API_KEY="SSQ9oDmBfWnK-BTuWmgnvk"
 
 ```bash
 python manage.py migrate
+
+python manage.py collectstatic
 ```
 
 5. **Start Django server**
@@ -78,6 +80,8 @@ python manage.py runserver
 ```bash
 python gradio_app.py
 ```
+7. **Visite Gradio UI**
+* Visit: http://127.0.0.1:7860 
 
 > By default, Gradio will provide a temporary public link for sharing. Use `share=True` to make it accessible globally.
 
