@@ -1,3 +1,5 @@
+[![Watch the video](images/render_deployment_issue_1.png)](https://drive.google.com/file/d/1ZWc-QDKpjW40JsLfbdCFbIq_Wj6rXzSB/view?usp=sharing)
+
 # 📄 RAG Chatbot PDF Q&A
 
 This project is a **Retrieval-Augmented Generation (RAG) chatbot** built with **Python, Django REST API, and Gradio UI**. It allows users to ask questions based on the content of a PDF document and receive AI-generated responses. The chatbot uses **Gemini (gemini-2.5-flash)** for generation, **all-MiniLM-L6-v2 embeddings** for semantic search, and **FAISS** for vector storage.
