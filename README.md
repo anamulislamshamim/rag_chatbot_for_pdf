@@ -172,3 +172,10 @@ Thank you for giving me this exciting project as an assignment. It allowed me to
 ## End Result Screenshot
 ![Chat Screenshot](images/gradio_chatbot_1.png)
 ```
+```
+## Render Deployment Issue
+I am using render free trial. In free trial maximum project size allow 512 MB. But our project size is much more 
+thatn 512 MB. Gemini SDK + Embedding Model + Faiss + numpy and internally Pytorch, Scikit-Learn, Tensorflow etc.
+![Render Deployment Failure 1](images/render_deployment_issue_1.png)
+![Render Deployment Failure 2](images/render_deployment_issue_2.png)
+```
