@@ -48,6 +48,8 @@ python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 
+python -m pip install --upgrade pip
+
 pip install -r requirements.txt
 ```
 
