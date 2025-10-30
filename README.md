@@ -1,4 +1,4 @@
-# 📺 Click Below Image To Watch Video
+# 📺 Video Explanation
 [![Video Explanation](images/video_thumbnai_rag_chatbot.png)](https://drive.google.com/file/d/1ZWc-QDKpjW40JsLfbdCFbIq_Wj6rXzSB/view)
 
 # 📄 RAG Chatbot PDF Q&A
